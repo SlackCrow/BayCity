@@ -1,5 +1,7 @@
 package socalledengineers.baycity;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +46,7 @@ public class DangeruGetter {
         br.close();
 
         // reference ends
-
+        Log.d("JSONReceived", sb.toString());
         JSONObject jsonObj = new JSONObject(sb.toString());
         JSONArray jsonArr = jsonObj.getJSONArray("meta");
         return null;
