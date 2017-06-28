@@ -31,4 +31,12 @@
         android:text="TextView"
         tools:layout_editor_absoluteX="18dp"
         tools:layout_editor_absoluteY="133dp" />
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+    </GridLayout>
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package socalledengineers.baycity;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,12 +8,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     DangeruGetter _apiWrapper;
+    ArrayList<String> _boardList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ArrayList<String> _boardList = new ArrayList<String>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         _apiWrapper = new DangeruGetter();
@@ -21,8 +26,16 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v){
             EditText boardName = (EditText) findViewById(R.id.editText);
             String boardNameString = boardName.getText().toString();
+            networkStuffDoer doNetwork = new networkStuffDoer();
+            doNetwork.execute(boardNameString);
+        }
+        });
+    }
+    private class networkStuffDoer extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String[] params) {
             try {
-                _apiWrapper.getThreadList(boardNameString, 10);
+                _boardList =_apiWrapper.getThreadList(params[0], 10);
             }
             catch (IOException e){
                 System.out.println("Fetch Error");
@@ -30,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
             catch(org.json.JSONException e){
                 System.out.println("JSON Error");
             }
+            return "null";
         }
-        });
+
+        @Override
+        protected void onPostExecute(String message) {
+        }
     }
 }
