@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ArrayList<String> _boardList = new ArrayList<String>();
+        final ArrayList<String> _boardList = new ArrayList<String>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         _apiWrapper = new DangeruGetter();
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             String boardNameString = boardName.getText().toString();
             networkStuffDoer doNetwork = new networkStuffDoer();
             doNetwork.execute(boardNameString);
+            TextView tView = (TextView) findViewById(R.id.textView);
         }
         });
     }

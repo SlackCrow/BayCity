@@ -49,6 +49,10 @@ public class DangeruGetter {
         Log.d("JSONReceived", sb.toString());
         JSONObject jsonObj = new JSONObject(sb.toString());
         JSONArray jsonArr = jsonObj.getJSONArray("board");
-        return null;
+        ArrayList<String> threadNames = new ArrayList<String>();
+        for(int i=0; i<jsonArr.length();i++){
+            threadNames.add(jsonArr.get(i).toString());
+        }
+        return threadNames;
     }
 }
